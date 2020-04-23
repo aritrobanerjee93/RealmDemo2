@@ -19,13 +19,14 @@ public class DisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display);
         mRecyclerView = findViewById(R.id.personRecycler);
         Log.i(TAG, "onCreate: before adapter creation" + "Also the recyclerView id is " + mRecyclerView.getId());
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Person> personRealmResults = realm.where(Person.class).findAll();
-        MyAdapter myAdapter = new MyAdapter(personRealmResults,this);
-        Log.i(TAG, "onCreate: After adapter creation");
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        Log.i(TAG, "onCreate: After linear layout manager creation and setting");
-        mRecyclerView.setAdapter(myAdapter);
-        Log.i(TAG, "onCreate: After setAdapter");
+        try (Realm realm = Realm.getDefaultInstance()) {
+            RealmResults<Person> personRealmResults = realm.where(Person.class).findAll();
+            MyAdapter myAdapter = new MyAdapter(personRealmResults, this);
+            Log.i(TAG, "onCreate: After adapter creation");
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            Log.i(TAG, "onCreate: After linear layout manager creation and setting");
+            mRecyclerView.setAdapter(myAdapter);
+            Log.i(TAG, "onCreate: After setAdapter");
+        }
     }
 }

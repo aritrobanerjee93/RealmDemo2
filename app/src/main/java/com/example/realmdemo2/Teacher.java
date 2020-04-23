@@ -3,22 +3,13 @@ package com.example.realmdemo2;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Person extends RealmObject {
+public class Teacher extends RealmObject {
     @PrimaryKey
     private long id;
     private String name;
     private String email;
     private String phone;
     private int age;
-    private long teacherId;
-
-    public long getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(long teacherId) {
-        this.teacherId = teacherId;
-    }
 
     public long getId() {
         return id;
